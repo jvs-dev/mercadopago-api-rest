@@ -11,22 +11,7 @@ function expiration() {
 }
 
 async function createpay(payerEmail, value) {
-    try {
-        const result = await payment.create({
-            body: {
-                transaction_amount: Number(value),
-                description: 'Pagamento de onjoker',
-                payment_method_id: 'pix',
-                date_of_expiration: expiration(),
-                payer: {
-                    email: `${payerEmail}`
-                },
-            }
-        });
-        return result;
-    } catch (error) {
-        return error;
-    }
+
 }
 
 const init = async (req, res) => {
@@ -37,7 +22,21 @@ const init = async (req, res) => {
         res.status(200).end();
         return;
     }
-    const result = await createpay(req.body.payerEmail, req.body.value);
-    res.json({ result });
+    try {
+        let result = await payment.create({
+            body: {
+                transaction_amount: Number(req.body.value),
+                description: 'Pagamento de onjoker',
+                payment_method_id: 'pix',
+                date_of_expiration: expiration(),
+                payer: {
+                    email: `${req.body.payerEmail}`
+                },
+            }
+        });
+        res.json({ result });
+    } catch (error) {
+        res.json({ error });
+    }    
 };
 export default init;
