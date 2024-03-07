@@ -1,7 +1,7 @@
 const mercadopago = require('mercadopago');
 const { MercadoPagoConfig, Payment } = mercadopago;
 
-const client = new MercadoPagoConfig({ accessToken: 'APP_USR-933353184123194-022913-573fb9b31b016d13f1d256518dc2c234-1694314657' });
+const client = new MercadoPagoConfig({ accessToken: `${process.env.ONJOKER_KEY}` });
 const payment = new Payment(client);
 
 const init = async (req, res) => {
