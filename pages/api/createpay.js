@@ -10,10 +10,6 @@ function expiration() {
     return expiration
 }
 
-async function createpay(payerEmail, value) {
-
-}
-
 const init = async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     if (req.method === 'OPTIONS') {
